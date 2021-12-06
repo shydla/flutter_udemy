@@ -1,10 +1,15 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
+  // ignore: avoid_renaming_method_parameters
   Widget build(BuildContext ctx) {
     return MaterialApp(
       home: Scaffold(
@@ -16,13 +21,17 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.white,
           leading: IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {},
+              icon: Icon(
+                Icons.menu,
+              ),
+              //TODO: onPressed
+              onPressed: () {}),
+          iconTheme: IconThemeData(
+            color: Colors.black54,
           ),
-          iconTheme: IconThemeData(color: Colors.black54),
           systemOverlayStyle: SystemUiOverlayStyle.light,
           actions: <Widget>[
-            IconButton(onPressed: () {}, icon: Icon(Icons.settings))
+            IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
           ],
         ),
         body: _buildBody(),
@@ -37,21 +46,22 @@ Widget _buildBody() {
       children: <Widget>[
         _headerImage(),
         SafeArea(
-            child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              _weatherDescription(),
-              Divider(),
-              _temperature(),
-              Divider(),
-              _temteratureForecast(),
-              Divider(),
-              _futerRatings(),
-            ],
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                _weatherDescription(),
+                Divider(),
+                _temperature(),
+                Divider(),
+                _temperatureForecast(),
+                Divider(),
+                _footerRatings(),
+              ],
+            ),
           ),
-        )),
+        ),
       ],
     ),
   );
@@ -59,7 +69,8 @@ Widget _buildBody() {
 
 Image _headerImage() {
   return Image(
-    image: NetworkImage('https://www.4vsar.ru/i/news/xxl/174654.jpg'),
+    image: NetworkImage(
+        'https://clarksvillenow.sagacom.com/files/2020/10/shutterstock_206307496-1200x768.jpg'),
     fit: BoxFit.cover,
   );
 }
@@ -67,14 +78,17 @@ Image _headerImage() {
 Column _weatherDescription() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
-    children: const <Widget>[
+    children: <Widget>[
       Text(
-        'Tuesday - September 16',
-        style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+        'Tuesday - May 22',
+        style: TextStyle(
+          fontSize: 32.0,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       Divider(),
       Text(
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
         style: TextStyle(color: Colors.black54),
       )
     ],
@@ -84,10 +98,10 @@ Column _weatherDescription() {
 Row _temperature() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
+    children: [
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children: [
           Icon(
             Icons.wb_sunny,
             color: Colors.yellow,
@@ -95,36 +109,36 @@ Row _temperature() {
         ],
       ),
       SizedBox(
-        width: 15.0,
+        width: 16,
       ),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
+        children: [
           Row(
-            children: const <Widget>[
+            children: [
               Text(
                 '15° Clear',
                 style: TextStyle(color: Colors.deepPurple),
-              ),
+              )
             ],
           ),
           Row(
-            children: const <Widget>[
+            children: [
               Text(
-                'Rostovskaya oblast, Rostov',
+                'Rostovskaya obl, Rostov n/D',
                 style: TextStyle(color: Colors.grey),
-              ),
+              )
             ],
-          )
+          ),
         ],
       )
     ],
   );
 }
 
-Wrap _temteratureForecast() {
+Wrap _temperatureForecast() {
   return Wrap(
-    spacing: 10.0,
+    spacing: 10,
     children: List.generate(7, (int index) {
       return Chip(
         label: Text(
@@ -135,53 +149,51 @@ Wrap _temteratureForecast() {
           Icons.wb_cloudy,
           color: Colors.blue.shade300,
         ),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4.0),
-            side: BorderSide(color: Colors.grey)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+        side: BorderSide(color: Colors.grey),
         backgroundColor: Colors.grey.shade100,
       );
     }),
   );
 }
 
-Row _futerRatings() {
+Row _footerRatings() {
   var stars = Row(
     mainAxisSize: MainAxisSize.min,
     children: [
       Icon(
         Icons.star,
-        size: 15.0,
+        size: 15,
         color: Colors.yellow[600],
       ),
       Icon(
         Icons.star,
-        size: 15.0,
+        size: 15,
         color: Colors.yellow[600],
       ),
       Icon(
         Icons.star,
-        size: 15.0,
+        size: 15,
         color: Colors.yellow[600],
       ),
       Icon(
         Icons.star,
-        size: 15.0,
+        size: 15,
         color: Colors.black,
       ),
       Icon(
         Icons.star,
-        size: 15.0,
+        size: 15,
         color: Colors.black,
-      ),
+      )
     ],
   );
-
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: <Widget>[
+    children: [
       Text(
         'Info with openweathermap.org',
-        style: TextStyle(fontSize: 15.0),
+        style: TextStyle(fontSize: 15),
       ),
       stars,
     ],
